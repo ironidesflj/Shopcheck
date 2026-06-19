@@ -1,0 +1,199 @@
+{
+  "products": [
+    {
+      "id": "prod-001",
+      "name": "Camiseta QA Explorer",
+      "description": "Camiseta preta com logo de bug — edição limitada para quem ama encontrar defeitos.",
+      "price": 79.9,
+      "category": "vestuario",
+      "stock": 40,
+      "image": "/images/tshirt.svg"
+    },
+    {
+      "id": "prod-002",
+      "name": "Caneca Regression Coffee",
+      "description": "Caneca de cerâmica 350ml. Perfeita para o café antes da suíte de regressão.",
+      "price": 49.9,
+      "category": "casa",
+      "stock": 18,
+      "image": "/images/mug.svg"
+    },
+    {
+      "id": "prod-003",
+      "name": "Mousepad Smoke Test",
+      "description": "Mousepad antiderrapante com mapa da pirâmide de testes.",
+      "price": 34.9,
+      "category": "escritorio",
+      "stock": 0,
+      "image": "/images/mousepad.svg"
+    },
+    {
+      "id": "prod-004",
+      "name": "Kit Post-it Edge Cases",
+      "description": "Bloco colorido com 200 post-its para anotar cenários de borda.",
+      "price": 24.9,
+      "category": "escritorio",
+      "stock": 112,
+      "image": "/images/postits.svg"
+    }
+  ],
+  "coupons": [
+    {
+      "code": "SAVE10",
+      "type": "percent",
+      "value": 10,
+      "minSubtotal": 50,
+      "active": true
+    },
+    {
+      "code": "FREESHIP",
+      "type": "shipping",
+      "value": 0,
+      "minSubtotal": 100,
+      "active": true
+    },
+    {
+      "code": "EXPIRED",
+      "type": "percent",
+      "value": 20,
+      "minSubtotal": 0,
+      "active": false
+    }
+  ],
+  "orders": [
+    {
+      "id": "ord-1781871306634",
+      "customer": {
+        "name": "Iron QA Junior",
+        "email": "iron@teste.com",
+        "address": "Rua dos Testes, 42 - Uberlandia"
+      },
+      "items": [
+        {
+          "productId": "prod-004",
+          "name": "Kit Post-it Edge Cases",
+          "unitPrice": 24.9,
+          "quantity": 2,
+          "lineTotal": 49.8
+        }
+      ],
+      "subtotal": 49.8,
+      "discount": 0,
+      "shipping": 15.9,
+      "total": 65.7,
+      "coupon": null,
+      "status": "confirmed",
+      "createdAt": "2026-06-19T12:15:06.634Z"
+    },
+    {
+      "id": "ord-1781871314521",
+      "customer": {
+        "name": "Iron QA Junior",
+        "email": "iron@teste.com",
+        "address": "Rua dos Testes, 42 - Uberlandia"
+      },
+      "items": [
+        {
+          "productId": "prod-004",
+          "name": "Kit Post-it Edge Cases",
+          "unitPrice": 24.9,
+          "quantity": 2,
+          "lineTotal": 49.8
+        }
+      ],
+      "subtotal": 49.8,
+      "discount": 0,
+      "shipping": 15.9,
+      "total": 65.7,
+      "coupon": null,
+      "status": "confirmed",
+      "createdAt": "2026-06-19T12:15:14.521Z"
+    },
+    {
+      "id": "ord-1781871319495",
+      "customer": {
+        "name": "Iron QA Junior",
+        "email": "iron@teste.com",
+        "address": "Rua dos Testes, 42 - Uberlandia"
+      },
+      "items": [
+        {
+          "productId": "prod-001",
+          "name": "Camiseta QA Explorer",
+          "unitPrice": 79.9,
+          "quantity": 1,
+          "lineTotal": 79.9
+        },
+        {
+          "productId": "prod-004",
+          "name": "Kit Post-it Edge Cases",
+          "unitPrice": 24.9,
+          "quantity": 1,
+          "lineTotal": 24.9
+        }
+      ],
+      "subtotal": 104.8,
+      "discount": 10.48,
+      "shipping": 15.9,
+      "total": 110.22,
+      "coupon": "SAVE10",
+      "status": "confirmed",
+      "createdAt": "2026-06-19T12:15:19.495Z"
+    },
+    {
+      "id": "ord-1781871351024",
+      "customer": {
+        "name": "Iron QA Junior",
+        "email": "iron@teste.com",
+        "address": "Rua dos Testes, 42 - Uberlandia"
+      },
+      "items": [
+        {
+          "productId": "prod-004",
+          "name": "Kit Post-it Edge Cases",
+          "unitPrice": 24.9,
+          "quantity": 2,
+          "lineTotal": 49.8
+        }
+      ],
+      "subtotal": 49.8,
+      "discount": 0,
+      "shipping": 15.9,
+      "total": 65.7,
+      "coupon": null,
+      "status": "confirmed",
+      "createdAt": "2026-06-19T12:15:51.024Z"
+    },
+    {
+      "id": "ord-1781871352249",
+      "customer": {
+        "name": "Iron QA Junior",
+        "email": "iron@teste.com",
+        "address": "Rua dos Testes, 42 - Uberlandia"
+      },
+      "items": [
+        {
+          "productId": "prod-001",
+          "name": "Camiseta QA Explorer",
+          "unitPrice": 79.9,
+          "quantity": 1,
+          "lineTotal": 79.9
+        },
+        {
+          "productId": "prod-004",
+          "name": "Kit Post-it Edge Cases",
+          "unitPrice": 24.9,
+          "quantity": 1,
+          "lineTotal": 24.9
+        }
+      ],
+      "subtotal": 104.8,
+      "discount": 10.48,
+      "shipping": 15.9,
+      "total": 110.22,
+      "coupon": "SAVE10",
+      "status": "confirmed",
+      "createdAt": "2026-06-19T12:15:52.249Z"
+    }
+  ]
+}

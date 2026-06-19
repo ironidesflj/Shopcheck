@@ -1,0 +1,25 @@
+{
+  "name": "shopcheck",
+  "version": "1.0.0",
+  "private": true,
+  "description": "E-commerce QA portfolio — API, E2E, accessibility and performance testing",
+  "scripts": {
+    "start:app": "node app/server.js",
+    "test": "playwright test",
+    "test:api": "playwright test --project=api",
+    "test:e2e": "playwright test --project=e2e",
+    "test:a11y": "playwright test --project=a11y",
+    "test:ui": "playwright test --ui",
+    "report": "playwright show-report",
+    "perf": "k6 run tests/perf/checkout-load.js"
+  },
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.10.1",
+    "@playwright/test": "^1.49.1",
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pedido confirmado — ShopCheck</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="brand" href="/">ShopCheck</a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="/">Produtos</a>
+        <a class="cart-link" href="/cart.html">
+          Carrinho (<span id="cart-count">0</span>)
+        </a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <h1>Pedido confirmado</h1>
+      <div id="order-details" class="panel" aria-live="polite"></div>
+      <div class="actions">
+        <a class="button" href="/">Voltar à loja</a>
+      </div>
+    </main>
+
+    <footer class="site-footer">ShopCheck — QA Portfolio Project</footer>
+
+    <script type="module">
+      import { formatMoney, updateCartBadge } from "/js/cart.js";
+
+      const details = document.getElementById("order-details");
+      const params = new URLSearchParams(window.location.search);
+      const orderId = params.get("orderId");
+
+      updateCartBadge();
+
+      async function loadOrder() {
+        let order = null;
+        try {
+          order = JSON.parse(sessionStorage.getItem("shopcheck_last_order") || "null");
+        } catch {
+          order = null;
+        }
+
+        if (!order && orderId) {
+          const response = await fetch(`/api/orders/${orderId}`);
+          if (response.ok) order = await response.json();
+        }
+
+        if (!order) {
+          details.innerHTML =
+            '<p class="error-banner">Pedido não encontrado. Volte à loja e tente novamente.</p>';
+          return;
+        }
+
+        details.innerHTML = `
+          <p class="success-banner">Obrigado, ${order.customer.name}! Seu pedido foi registrado.</p>
+          <p><strong>Número do pedido:</strong> <span id="order-id">${order.id}</span></p>
+          <p><strong>Total pago:</strong> ${formatMoney(order.total)}</p>
+          <p><strong>Entrega para:</strong> ${order.customer.address}</p>
+          <ul>
+            ${order.items
+              .map((item) => `<li>${item.quantity}x ${item.name}</li>`)
+              .join("")}
+          </ul>
+        `;
+      }
+
+      loadOrder();
+    </script>
+  </body>
+</html>

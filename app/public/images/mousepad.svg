@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" role="img" aria-label="Mousepad">
+  <rect width="200" height="140" fill="#f8fafc"/>
+  <rect x="35" y="45" width="130" height="70" rx="12" fill="#134e4a"/>
+  <rect x="55" y="65" width="90" height="10" fill="#99f6e4"/>
+  <rect x="55" y="82" width="60" height="8" fill="#5eead4"/>
+</svg>

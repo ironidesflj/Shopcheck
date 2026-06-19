@@ -1,0 +1,39 @@
+import { defineConfig, devices } from "@playwright/test";
+
+const baseURL = process.env.BASE_URL || "http://localhost:3000";
+
+export default defineConfig({
+  testDir: "./tests",
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  retries: process.env.CI ? 1 : 0,
+  workers: process.env.CI ? 2 : undefined,
+  reporter: [["html", { open: "never" }], ["list"]],
+  use: {
+    baseURL,
+    trace: "on-first-retry",
+    screenshot: "only-on-failure",
+  },
+  projects: [
+    {
+      name: "api",
+      testMatch: /api\/.*\.spec\.ts/,
+    },
+    {
+      name: "e2e",
+      testMatch: /e2e\/.*\.spec\.ts/,
+      use: { ...devices["Desktop Chrome"] },
+    },
+    {
+      name: "a11y",
+      testMatch: /a11y\/.*\.spec\.ts/,
+      use: { ...devices["Desktop Chrome"] },
+    },
+  ],
+  webServer: {
+    command: "node app/server.js",
+    url: baseURL,
+    reuseExistingServer: !process.env.CI,
+    timeout: 120_000,
+  },
+});

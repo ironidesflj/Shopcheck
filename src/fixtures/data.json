@@ -1,0 +1,19 @@
+{
+  "customer": {
+    "name": "Iron QA Junior",
+    "email": "iron@teste.com",
+    "address": "Rua dos Testes, 42 - Uberlandia"
+  },
+  "coupons": {
+    "validPercent": "SAVE10",
+    "validShipping": "FREESHIP",
+    "expired": "EXPIRED",
+    "invalid": "NOTREAL"
+  },
+  "products": {
+    "tshirt": "prod-001",
+    "mug": "prod-002",
+    "outOfStock": "prod-003",
+    "postits": "prod-004"
+  }
+}

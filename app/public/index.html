@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ShopCheck — Loja QA</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="brand" href="/">ShopCheck</a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="/">Produtos</a>
+        <a class="cart-link" href="/cart.html">
+          Carrinho (<span id="cart-count">0</span>)
+        </a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <h1>Produtos para quem testa software</h1>
+      <p class="lead">
+        Loja demo do portfólio ShopCheck. Use este catálogo para praticar fluxos de
+        compra, cupons e checkout.
+      </p>
+      <div id="product-grid" class="product-grid" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">ShopCheck — QA Portfolio Project</footer>
+
+    <script type="module">
+      import {
+        addToCart,
+        fetchProducts,
+        formatMoney,
+        updateCartBadge,
+      } from "/js/cart.js";
+
+      const grid = document.getElementById("product-grid");
+
+      function renderProducts(products) {
+        grid.innerHTML = products
+          .map(
+            (product) => `
+          <article class="product-card" aria-labelledby="title-${product.id}">
+            <img src="${product.image}" alt="" />
+            <h2 id="title-${product.id}">${product.name}</h2>
+            <p>${product.description}</p>
+            <p class="product-price">${formatMoney(product.price)}</p>
+            <span class="stock-badge ${product.stock === 0 ? "out" : ""}">
+              ${product.stock === 0 ? "Sem estoque" : `${product.stock} em estoque`}
+            </span>
+            <button
+              type="button"
+              data-product-id="${product.id}"
+              ${product.stock === 0 ? "disabled" : ""}
+              aria-label="Adicionar ${product.name} ao carrinho"
+            >
+              Adicionar ao carrinho
+            </button>
+          </article>
+        `
+          )
+          .join("");
+      }
+
+      grid.addEventListener("click", async (event) => {
+        const button = event.target.closest("button[data-product-id]");
+        if (!button) return;
+        const product = productsCache.find((p) => p.id === button.dataset.productId);
+        if (!product) return;
+        addToCart(product);
+        button.textContent = "Adicionado!";
+        setTimeout(() => {
+          button.textContent = "Adicionar ao carrinho";
+        }, 1200);
+      });
+
+      let productsCache = [];
+      updateCartBadge();
+      fetchProducts()
+        .then((products) => {
+          productsCache = products;
+          renderProducts(products);
+        })
+        .catch(() => {
+          grid.innerHTML =
+            '<p class="error-banner">Não foi possível carregar os produtos.</p>';
+        });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" role="img" aria-label="Post-its">
+  <rect width="200" height="140" fill="#f8fafc"/>
+  <rect x="50" y="35" width="45" height="45" fill="#fde68a"/>
+  <rect x="78" y="55" width="45" height="45" fill="#fca5a5"/>
+  <rect x="106" y="40" width="45" height="45" fill="#93c5fd"/>
+</svg>

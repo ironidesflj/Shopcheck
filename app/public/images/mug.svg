@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 140" role="img" aria-label="Caneca">
+  <rect width="200" height="140" fill="#f8fafc"/>
+  <rect x="70" y="40" width="70" height="80" rx="8" fill="#fff" stroke="#0f766e" stroke-width="4"/>
+  <path d="M140 55 C165 55 170 75 170 90 C170 105 165 115 140 115" fill="none" stroke="#0f766e" stroke-width="4"/>
+</svg>

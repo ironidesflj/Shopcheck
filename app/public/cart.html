@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrinho — ShopCheck</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+    <header class="site-header">
+      <a class="brand" href="/">ShopCheck</a>
+      <nav class="site-nav" aria-label="Navegação principal">
+        <a href="/">Produtos</a>
+        <a class="cart-link" href="/cart.html" aria-current="page">
+          Carrinho (<span id="cart-count">0</span>)
+        </a>
+      </nav>
+    </header>
+
+    <main id="main-content">
+      <h1>Seu carrinho</h1>
+      <div id="cart-content" class="panel" aria-live="polite"></div>
+    </main>
+
+    <footer class="site-footer">ShopCheck — QA Portfolio Project</footer>
+
+    <script type="module">
+      import {
+        formatMoney,
+        getCart,
+        getSubtotal,
+        removeFromCart,
+        updateCartBadge,
+      } from "/js/cart.js";
+
+      const SHIPPING_FEE = 15.9;
+      const content = document.getElementById("cart-content");
+
+      function renderCart() {
+        const cart = getCart();
+        updateCartBadge();
+
+        if (cart.length === 0) {
+          content.innerHTML = `
+            <div class="empty-state">
+              <p>Seu carrinho está vazio.</p>
+              <a class="button" href="/">Ver produtos</a>
+            </div>
+          `;
+          return;
+        }
+
+        const subtotal = getSubtotal(cart);
+        const total = subtotal + SHIPPING_FEE;
+
+        content.innerHTML = `
+          <table class="cart-table">
+            <caption class="sr-only">Itens no carrinho</caption>
+            <thead>
+              <tr>
+                <th scope="col">Produto</th>
+                <th scope="col">Qtd</th>
+                <th scope="col">Preço</th>
+                <th scope="col">Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cart
+                .map(
+                  (item) => `
+                <tr>
+                  <td>${item.name}</td>
+                  <td>${item.quantity}</td>
+                  <td>${formatMoney(item.price * item.quantity)}</td>
+                  <td>
+                    <button type="button" data-remove="${item.productId}">
+                      Remover
+                    </button>
+                  </td>
+                </tr>
+              `
+                )
+                .join("")}
+            </tbody>
+          </table>
+          <div class="cart-summary" aria-label="Resumo do pedido">
+            <div class="summary-row"><span>Subtotal</span><span id="subtotal">${formatMoney(subtotal)}</span></div>
+            <div class="summary-row"><span>Frete</span><span>${formatMoney(SHIPPING_FEE)}</span></div>
+            <div class="summary-row total"><span>Total</span><span id="total">${formatMoney(total)}</span></div>
+          </div>
+          <div class="actions">
+            <a class="button" href="/checkout.html">Ir para checkout</a>
+            <a class="button button-secondary" href="/">Continuar comprando</a>
+          </div>
+        `;
+      }
+
+      content.addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-remove]");
+        if (!button) return;
+        removeFromCart(button.dataset.remove);
+        renderCart();
+      });
+
+      renderCart();
+    </script>
+  </body>
+</html>
